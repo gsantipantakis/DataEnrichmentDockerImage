@@ -3,11 +3,13 @@ The data enrichment component Docker image of MobiSpaces project is based on RDF
 
 ## Start the component 
 
-At command prompt, in the working directory, write the command:
+At the command prompt, in the working directory, write the following command to process a single configuration file:
 ```
 java -jar RDF-Gen.jar config.rdf
 ```
-to start the data enrichment component with the configurations provided in the config.rdf file. Example configuration files are also available in the working directory (see testSample.rdf and UC2_contextual1.rdf)
+Example configuration files are also available in the working directory (see testSample.rdf and UC2_contextual1.rdf). 
+
+Please note that the Dockerfile included will start the data enrichment component as a service, receiving configurations as POST requests by default.
 
 ## Build and run with Docker
 
