@@ -1,0 +1,34 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dcf="http://www.datacron-project.eu/RDFGen_conf#"
+>
+
+	<!-- the absolute path to data source, this can be a folder to be recursively processed -->
+	<dcf:DataSource rdf:about="map/land_use_thessaloniki/polygons_WGS84.shp">
+
+		<dcf:connector>GenericShapeConnector</dcf:connector>
+
+		<dcf:xPathEntity>the_geom</dcf:xPathEntity>
+
+		<dcf:template>
+makeLandUseURI(?OBJECTID) a getLandUseCategory(?Category,?subCategory) ; addLandUseDescription(?Descr,?legend,?Lektiko) ; 
+rdfs:seeAlso asString(?Fek) ; :hasGeometry ?geomID . 
+geom2geoSPARQL(?geomID,?ogc) .
+</dcf:template>
+
+		<dcf:inputVariables>OBJECTID,Category,subCategory,legend,Descr,Lektiko,Sxolio,Fek,Diagram,Layer</dcf:inputVariables>
+
+		<dcf:geomNamespace>http://www.mobispaces.eu/LandUse</dcf:geomNamespace>
+
+<!--		<dcf:geomFolder>geometries</dcf:geomFolder> -->
+
+		<dcf:TemplateVariables>?OBJECTID,?Category,?subCategory,?legend,?Descr,?Lektiko,?Sxolio,?Fek,?Diagram,?Layer,?geomID,?ogc</dcf:TemplateVariables>
+
+		<dcf:exportOGC>?ogc</dcf:exportOGC>
+
+		<dcf:prefix>prefix_mobispaces.ttl</dcf:prefix>
+		<dcf:output>mobiSpaces_UC2_landUse.ttl</dcf:output>
+
+	</dcf:DataSource>
+
+</rdf:RDF>
