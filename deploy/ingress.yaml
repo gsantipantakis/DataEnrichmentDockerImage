@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-nginx-apps-prod
+    ingress.kubernetes.io/proxy-body-size: "0"
+    ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx-apps
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  labels:
+    app: rdf-gen
+  name: rdf-gen
+  namespace: mobispaces
+spec:
+  ingressClassName: nginx-apps
+  rules:
+    - host: rdf-gen.myDomain.eu
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: rdf-gen
+                port:
+                  number: 2023
+  tls:
+    - hosts:
+        - rdf-gen.myDomain.eu
+      secretName: rdf-gen-tls
